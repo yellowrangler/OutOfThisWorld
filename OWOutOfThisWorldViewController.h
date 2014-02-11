@@ -1,5 +1,5 @@
 //
-//  OWViewController.h
+//  OWOutOfThisWorldViewController.h
 //  Out Of This World
 //
 //  Created by Tarrant Cutler on 2/11/14.
@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface OWViewController : UIViewController
+@interface OWOutOfThisWorldViewController : UITableViewController
+
+@property (strong, nonatomic) NSMutableArray *planets;
 
 @end
