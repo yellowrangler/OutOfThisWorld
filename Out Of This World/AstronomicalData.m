@@ -39,6 +39,9 @@
     NSDictionary *neptuneDictionary = @{PLANET_NAME : @"Neptune", PLANET_GRAVITY : @11.0, PLANET_DIAMETER : @49528, PLANET_YEAR_LENGTH : @59800, PLANET_DAY_LENGTH : @16.1, PLANET_TEMPERATURE : @-100, PLANET_NUMBER_OF_MOONS : @14, PLANET_NICKNAME : @"Poseidon", PLANET_INTERESTING_FACT : @"Neptune was discovered in 1846"};
     [planetInformation addObject:neptuneDictionary];
     
+    NSDictionary *plutoDictionary = @{PLANET_NAME : @"Pluto", PLANET_GRAVITY : @2.7, PLANET_DIAMETER : @1430, PLANET_YEAR_LENGTH : @247, PLANET_DAY_LENGTH : @153.3, PLANET_TEMPERATURE : @-387, PLANET_NUMBER_OF_MOONS : @0, PLANET_NICKNAME : @"Goofy", PLANET_INTERESTING_FACT : @"Pluto ha been reclassified as a dwarf planet"};
+    [planetInformation addObject:plutoDictionary];
+    
     return [planetInformation copy];
 }
 

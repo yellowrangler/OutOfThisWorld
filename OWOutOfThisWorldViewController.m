@@ -7,6 +7,8 @@
 //
 
 #import "OWOutOfThisWorldViewController.h"
+#import "AstronomicalData.h"
+#import "OWSpaceObject.h"
 
 @interface OWOutOfThisWorldViewController ()
 
@@ -32,42 +34,16 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+
     self.planets = [[NSMutableArray alloc] init];
-    NSString *planet1 = @"Mercury";
-    NSString *planet2 = @"Venus";
-    NSString *planet3 = @"Earth";
-    NSString *planet4 = @"Mars";
-    NSString *planet5 = @"Jupiter";
-    NSString *planet6 = @"Saturn";
-    NSString *planet7 = @"Uranus";
-    NSString *planet8 = @"Neptune";
-    NSString *planet9 = @"Pluto";
-    
-    [self.planets addObject:planet1];
-    [self.planets addObject:planet2];
-    [self.planets addObject:planet3];
-    [self.planets addObject:planet4];
-    [self.planets addObject:planet5];
-    [self.planets addObject:planet6];
-    [self.planets addObject:planet7];
-    [self.planets addObject:planet8];
-    [self.planets addObject:planet9];
-    
-    NSNumber *myNumber = [NSNumber numberWithInt:5];
-    NSLog(@"%@",myNumber);
-    NSNumber *myFloat = [NSNumber numberWithFloat:3.14];
-    NSLog(@"%@",myFloat);
-    
-//    NSMutableDictionary *myDictionary = [[NSMutableDictionary alloc] init];
-//    NSString *firstColor =@"red";
-//    [myDictionary setObject:firstColor forKey:@"firetruck color"];
-//    [myDictionary setObject:@"blue" forKey:@"ocean color"];
-//    [myDictionary setObject:@"yellow" forKey:@"star color"];
-//    NSLog(@"%@",myDictionary);
-//    
-//    NSString *blueString = [myDictionary objectForKey:@"ocean color"];
-//    NSLog(@"%@",blueString);
-    
+    for (NSMutableDictionary *planetData in [AstronomicalData allKnownPlanets])
+    {
+        NSString *imageName = [NSString stringWithFormat:@"%@.jpg", planetData[PLANET_NAME]];
+        
+        OWSpaceObject *planet = [[OWSpaceObject alloc] initWithData:planetData andImage:[UIImage imageNamed:imageName]];
+        [self.planets addObject:planet];
+    }
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -98,17 +74,13 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     // Configure the cell...
-    cell.textLabel.text = [self.planets objectAtIndex:indexPath.row];
-    
-    if (indexPath.section == 0)
-    {
-        cell.backgroundColor = [UIColor redColor];
-    }
-    else
-    {
-        cell.backgroundColor = [UIColor blueColor];
-
-    }
+    OWSpaceObject *planet = [self.planets objectAtIndex:indexPath.row];
+    cell.textLabel.text = planet.name;
+    cell.detailTextLabel.text = planet.nickname;
+    cell.imageView.image = planet.spaceImage;
+    cell.backgroundColor = [UIColor clearColor];
+    cell.textLabel.textColor = [UIColor whiteColor];
+    cell.detailTextLabel.textColor = [UIColor colorWithWhite:0.5 alpha:1.0];
     
     return cell;
 }
