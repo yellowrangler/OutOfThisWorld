@@ -9,6 +9,8 @@
 #import "OWOutOfThisWorldViewController.h"
 #import "AstronomicalData.h"
 #import "OWSpaceObject.h"
+#import "OWSpaceImageViewController.h"
+#import "OWSpaceDataViewController.h"
 
 @interface OWOutOfThisWorldViewController ()
 
@@ -43,7 +45,31 @@
         OWSpaceObject *planet = [[OWSpaceObject alloc] initWithData:planetData andImage:[UIImage imageNamed:imageName]];
         [self.planets addObject:planet];
     }
+}
 
+-(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([sender isKindOfClass:[UITableViewCell class]])
+    {
+        if ([segue.destinationViewController isKindOfClass:[OWSpaceImageViewController class]])
+        {
+            OWSpaceImageViewController *nextViewController = segue.destinationViewController;
+            NSIndexPath *path = [self.tableView indexPathForCell:sender];
+            OWSpaceObject *spaceObject = self.planets[path.row];
+            nextViewController.spaceObject = spaceObject;
+        }
+    }
+    
+    if ([sender isKindOfClass:[NSIndexPath class]])
+    {
+        if ([segue.destinationViewController isKindOfClass:[OWSpaceDataViewController class]])
+        {
+            OWSpaceDataViewController *nextViewController = segue.destinationViewController;
+            NSIndexPath *path =  sender;
+            OWSpaceObject *spaceObject =  self.planets[path.row];
+            nextViewController.spaceObject = spaceObject;
+        }
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -83,6 +109,13 @@
     cell.detailTextLabel.textColor = [UIColor colorWithWhite:0.5 alpha:1.0];
     
     return cell;
+}
+
+#pragma mark UITableViewDelegate
+
+-(void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
+{
+    [self performSegueWithIdentifier:@"pushToSpaceData" sender:indexPath];
 }
 
 /*

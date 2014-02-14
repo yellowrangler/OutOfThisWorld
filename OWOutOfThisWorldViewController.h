@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface OWOutOfThisWorldViewController : UITableViewController
+@interface OWOutOfThisWorldViewController : UITableViewController <UIScrollViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) NSMutableArray *planets;
 
