@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "OWSpaceObject.h"
+
 @interface OWSpaceDataViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
